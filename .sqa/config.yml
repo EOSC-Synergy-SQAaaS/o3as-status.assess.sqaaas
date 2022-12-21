@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/o3as-status:
+      branch: master
+      repo: https://github.com/EOSC-synergy/o3as-status
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/EOSC-synergy/o3as-status git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-beige-otter.sh
+        container: qc.acc_gamy-puce-cichlid
+  QC.Doc:
+    repos:
+      github.com/EOSC-synergy/o3as-status find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-viridian-chicken.sh
+        container: qc.doc_slimy-coral-wasp
+      github.com/EOSC-synergy/o3as-status git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-taupe-monkey.sh
+        container: qc.doc_beady-orchid-urchin
+      github.com/EOSC-synergy/o3as-status markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cranky-crimson-snake.sh
+        container: qc.doc_sickly-aqua-leopard
+  QC.Lic:
+    repos:
+      github.com/EOSC-synergy/o3as-status licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-thistle-vulture.sh
+        container: qc.lic_dorky-emerald-blue
+  QC.Sty:
+    repos:
+      github.com/EOSC-synergy/o3as-status jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-asparagus-caiman.sh
+        container: qc.sty_zippy-celadon-bat
+  QC.Ver:
+    repos:
+      github.com/EOSC-synergy/o3as-status get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-copper-bulldog.sh
+        container: qc.ver_crabby-pear-camel
+timeout: 5400
